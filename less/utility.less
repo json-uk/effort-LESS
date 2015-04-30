@@ -1,0 +1,255 @@
+@import "settings";
+// ====
+// Mixin Utilities
+// 
+// Author: Jason Chandler
+// Email: mail@example.com
+// ================================================================================
+
+// ====
+// Normalised Maths for Offsets
+// ================================================================================
+
+// Top Offset
+// =====
+.topUnitReturn(
+  @val;
+  @context: @_base_font_px;
+  @_do_not_convert_below_threshold:null
+) when (@_output_type = em)
+        and (@_do_not_convert_below_threshold = null)
+        , (@_output_type = em)
+        and (isnumber(@_do_not_convert_below_threshold)) 
+        and (@val >= @_do_not_convert_below_threshold) {
+  @top: unit(round((@val / @context),8), em);
+}
+// Rem calculation
+.topUnitReturn(
+  @val;
+  @context: @_base_font_px;
+  @_do_not_convert_below_threshold:null
+) when (@_output_type = rem)
+        and (@_do_not_convert_below_threshold = null)
+        , (@_output_type = rem)
+        and (isnumber(@_do_not_convert_below_threshold)) 
+        and (@val >= @_do_not_convert_below_threshold){
+  @top: unit(round((@val / @_base_font_px),8), rem);
+}
+
+// Returns px if value if @_output_type = px, @val is '0' or below defined threshold
+.topUnitReturn(
+  @val;
+  @context: @_base_font_px;
+  @_do_not_convert_below_threshold:null
+) when (@_output_type = px)
+        , (isnumber(@_do_not_convert_below_threshold)) and (@val < @_do_not_convert_below_threshold) {
+  @top: ceil(unit(@val,px));
+}
+.topUnitReturn(
+  @val;
+  @context: @_base_font_px;
+  @_do_not_convert_below_threshold:null
+) when (@val = 0) {
+  @top: 0;
+}
+
+
+// Right Offset
+// =====
+.rightUnitReturn(
+  @val;
+  @context: @_base_font_px;
+  @_do_not_convert_below_threshold:null
+) when (@_output_type = em)
+        and (@_do_not_convert_below_threshold = null)
+        , (@_output_type = em)
+        and (isnumber(@_do_not_convert_below_threshold)) 
+        and (@val >= @_do_not_convert_below_threshold){
+  @right: unit(round((@val / @context),8), em);
+}
+// Rem calculation
+.rightUnitReturn(
+  @val;
+  @context: @_base_font_px;
+  @_do_not_convert_below_threshold:null
+) when (@_output_type = rem)
+        and (@_do_not_convert_below_threshold = null)
+        , (@_output_type = rem)
+        and (isnumber(@_do_not_convert_below_threshold)) 
+        and (@val >= @_do_not_convert_below_threshold){
+  @right: unit(round((@val / @_base_font_px),8), rem);
+}
+// Returns px if value if @_output_type = px, @val is '0' or below defined threshold
+.rightUnitReturn(
+  @val;
+  @context: @_base_font_px;
+  @_do_not_convert_below_threshold:null
+) when (@_output_type = px)
+        , (isnumber(@_do_not_convert_below_threshold)) and (@val < @_do_not_convert_below_threshold) {
+  @right: ceil(unit(@val,px));
+}
+.rightUnitReturn(
+  @val;
+  @context: @_base_font_px;
+  @_do_not_convert_below_threshold:null
+) when (@val = 0) {
+  @right: 0;
+}
+
+// Bottom Offset
+.bottomUnitReturn(
+  @val;
+  @context: @_base_font_px;
+  @_do_not_convert_below_threshold:null
+) when (@_output_type = em)
+        and (@_do_not_convert_below_threshold = null)
+        , (@_output_type = eem)
+        and (isnumber(@_do_not_convert_below_threshold)) 
+        and (@val >= @_do_not_convert_below_threshold){
+  @bottom: unit(round((@val / @context),8), em);
+}
+// Rem calculation
+.bottomUnitReturn(
+  @val;
+  @context: @_base_font_px;
+  @_do_not_convert_below_threshold:null
+) when (@_output_type = rem)
+        and (@_do_not_convert_below_threshold = null)
+        , (@_output_type = rem)
+        and (isnumber(@_do_not_convert_below_threshold)) 
+        and (@val >= @_do_not_convert_below_threshold){
+  @bottom: unit(round((@val / @_base_font_px),8), rem);
+}
+// Returns px if value if @_output_type = px, @val is '0' or below defined threshold
+.bottomUnitReturn(
+  @val;
+  @context: @_base_font_px;
+  @_do_not_convert_below_threshold:null
+) when (isnumber(@_do_not_convert_below_threshold)) and (@val < @_do_not_convert_below_threshold) 
+        , (@_output_type = px) {
+  @bottom: ceil(unit(@val,px));
+}
+.bottomUnitReturn(
+  @val;
+  @context: @_base_font_px;
+  @_do_not_convert_below_threshold:null
+) when (@val = 0) {
+  @bottom: 0;
+}
+
+// Left Offset
+.leftUnitReturn(
+  @val;
+  @context: @_base_font_px;
+  @_do_not_convert_below_threshold:null
+) when (@_output_type = em)
+        and (@_do_not_convert_below_threshold = null)
+        , (@_output_type = em)
+        and (isnumber(@_do_not_convert_below_threshold)) 
+        and (@val >= @_do_not_convert_below_threshold){
+  @left: unit(round((@val / @context),8), em);
+}
+// Rem calculation
+.leftUnitReturn(
+  @val;
+  @context: @_base_font_px;
+  @_do_not_convert_below_threshold:null
+) when (@_output_type = rem)
+        and (@_do_not_convert_below_threshold = null)
+        , (@_output_type = rem)
+        and (isnumber(@_do_not_convert_below_threshold)) 
+        and (@val >= @_do_not_convert_below_threshold){
+  @left: unit(round((@val / @_base_font_px),8), rem);
+}
+.leftUnitReturn(
+  @val;
+  @context: @_base_font_px;
+  @_do_not_convert_below_threshold:null
+) when (@_do_not_convert_below_threshold = null), (isnumber(@_do_not_convert_below_threshold)) 
+        and (@val >= @_do_not_convert_below_threshold) 
+        and (@_output_type = rem) {
+  @left: unit(round((@val / @context),8), rem);
+}
+
+// Returns px if value if @_output_type = px, @val is '0' or below defined threshold
+.leftUnitReturn(
+  @val;
+  @context: @_base_font_px;
+  @_do_not_convert_below_threshold:null
+) when (isnumber(@_do_not_convert_below_threshold)) and (@val < @_do_not_convert_below_threshold) 
+        , (@_output_type = px) {
+  @left: ceil(unit(@val,px));
+}
+.leftUnitReturn(
+  @val;
+  @context: @_base_font_px;
+  @_do_not_convert_below_threshold:null
+) when (@val = 0) {
+  @left: 0;
+}
+
+// ====
+// REM IE Fallback
+// ================================================================================
+.remFallback(
+  @name;
+  @values
+) when (@_old_ie = true) 
+        and (@_output_type = rem)
+        and (length(@values) = 4) {
+    @top: unit(extract(@values,1),px);
+    @right: unit(extract(@values,2),px);
+    @bottom: unit(extract(@values,3),px);
+    @left: unit(extract(@values,4),px);
+
+  @{name}: @top @right @bottom @left; 
+}
+.remFallback(
+  @name;
+  @values
+) when (@_old_ie = true) 
+        and (@_output_type = rem)
+        and (length(@values) = 3) {
+
+    @top: unit(extract(@values,1),px);
+    @right: unit(extract(@values,2),px);
+    @bottom: unit(extract(@values,3),px);
+
+  @{name}: @top @right @bottom; 
+}
+.remFallback(
+  @name;
+  @values
+) when (@_old_ie = true) 
+        and (@_output_type = rem)
+        and (length(@values) = 2) {
+          
+    @top: unit(extract(@values,1),px);
+    @right: unit(extract(@values,2),px);
+
+  @{name}: @top @right; 
+}
+.remFallback(
+  @name;
+  @values
+) when (@_old_ie = true) 
+        and (@_output_type = rem)
+        and (length(@values) = 1) {
+          
+    @top: unit(@values,px);
+
+  @{name}:@top; 
+}
+
+
+// CSS Property parser
+// =====
+.getCSSProps(
+  @props;
+) when (@props) {
+  @parsedProps:@props;
+}
+
+
+
+

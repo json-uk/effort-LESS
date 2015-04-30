@@ -1,0 +1,232 @@
+@import "settings";
+@import "utility";
+// ====
+// Mixins
+// ================================================================================
+
+// Normalised Property Mixins
+// =====
+.prop(
+  @name;
+  @value
+){
+  @{name}: @value;
+}
+
+// ====
+// Multi-offset "Super Mixins" to calculate/convert from px -> x
+//
+// Usage: .propCalc(margin-left, 10), will return: margin-left: .625em;
+// 
+// @param name: CSS property name. For example: margin 
+// @param output: Output type for numeric values. Values are, em[,rem,px]
+// @param target: Sets the parent font context (needed only for ems output_type)
+// @param threshold: below this number offsets will be returned as px
+//
+// ================================================================================
+
+
+// Ems
+// =====
+.propCalc(
+  @name;
+  @values;
+  @context:@_base_font_px;
+  @convThreshold:null 
+) when (@_output_type = em) and (length(@values) = 4 ) {
+  .topUnitReturn(extract(@values, 1);@context;@convThreshold);
+  .rightUnitReturn(extract(@values, 2);@context;@convThreshold);
+  .bottomUnitReturn(extract(@values, 3);@context;@convThreshold);
+  .leftUnitReturn(extract(@values, 4);@context;@convThreshold);
+
+  @{name}: @top @right @bottom @left;
+}
+.propCalc(
+  @name;
+  @values;
+  @context:@_base_font_px;
+  @convThreshold:null
+) when (@_output_type = em) and (length(@values) = 3) {
+  .topUnitReturn(extract(@values, 1);@context;@convThreshold);
+  .rightUnitReturn(extract(@values, 2);@context;@convThreshold);
+  .bottomUnitReturn(extract(@values, 3);@context;@convThreshold);
+
+  @{name}: @top @right @bottom;
+}
+.propCalc(
+  @name;
+  @values;
+  @context:@_base_font_px;
+  @convThreshold:null
+) when (@_output_type = em) and (length(@values) = 2) {
+  .topUnitReturn(extract(@values, 1);@context;@convThreshold);
+  .rightUnitReturn(extract(@values, 2);@context;@convThreshold);
+
+  @{name}: @top @right;
+}
+.propCalc(
+  @name;
+  @values;
+  @context:@_base_font_px;
+  @convThreshold:null
+) when (@_output_type = em) and (length(@values) = 1) {
+  .topUnitReturn(extract(@values, 1);@context;@convThreshold);
+
+  @{name}: @top;
+}
+
+// Rem
+// =====
+.propCalc(
+  @name;
+  @values;
+  @context:@_base_font_px;
+  @convThreshold:null
+) when (@_output_type = rem) and (length(@values) = 4 ) {
+  .topUnitReturn(extract(@values, 1);@context;@convThreshold);
+  .rightUnitReturn(extract(@values, 2);@context;@convThreshold);
+  .bottomUnitReturn(extract(@values, 3);@context;@convThreshold);
+  .leftUnitReturn(extract(@values, 4);@context;@convThreshold);
+
+  .remFallback(@name;@values);
+  @{name}: @top @right @bottom @left;
+}
+.propCalc(
+  @name;
+  @values;
+  @context:@_base_font_px;
+  @convThreshold:null
+) when (@_output_type = rem) and (length(@values) = 3) {
+  .topUnitReturn(extract(@values, 1);@context;@convThreshold);
+  .rightUnitReturn(extract(@values, 2);@context;@convThreshold);
+  .bottomUnitReturn(extract(@values, 3);@context;@convThreshold);
+
+  .remFallback(@name;@values);
+  @{name}: @top @right @bottom;
+}
+.propCalc(
+  @name;
+  @values;
+  @context:@_base_font_px;
+  @convThreshold:null
+) when (@_output_type = rem) and (length(@values) = 2) {
+  .topUnitReturn(extract(@values, 1);@context;@convThreshold);
+  .rightUnitReturn(extract(@values, 2);@context;@convThreshold);
+
+  .remFallback(@name;@values);
+  @{name}: @top @right;
+}
+.propCalc(
+  @name;
+  @values;
+  @context:@_base_font_px;
+  @convThreshold:null
+) when (@_output_type = rem) and (length(@values) = 1) {
+  .topUnitReturn(extract(@values, 1);@context;@convThreshold);
+  
+  .remFallback(@name;@values);
+  @{name}: @top;
+}
+
+// Pixels
+// =====
+.propCalc(
+  @name;
+  @values;
+  @context:@_base_font_px;
+  @convThreshold:null
+) when (@_output_type = px) and (length(@values) = 4 ) {
+  @context: extract(@arguments,);
+  .topUnitReturn(extract(@values, 1));
+  .rightUnitReturn(extract(@values, 2));
+  .bottomUnitReturn(extract(@values, 3));
+  .leftUnitReturn(extract(@values, 4));
+
+  @{name}: @top @right @bottom @left;
+}
+.propCalc(
+  @name;
+  @values;
+  @context:@_base_font_px;
+  @convThreshold:null
+) when (@_output_type = px) and (length(@values) = 3) {
+  .topUnitReturn(extract(@values, 1));
+  .rightUnitReturn(extract(@values, 2));
+  .bottomUnitReturn(extract(@values, 3));
+
+  @{name}: @top @right @bottom;
+}
+.propCalc(
+  @name;
+  @values;
+  @context:@_base_font_px;
+  @convThreshold:null
+) when (@_output_type = px) and (length(@values) = 2) {
+  .topUnitReturn(extract(@values, 1));
+  .rightUnitReturn(extract(@values, 2));
+
+  @{name}: @top @right;
+}
+.propCalc(
+  @name;
+  @values;
+  @context:@_base_font_px;
+  @convThreshold:null
+) when (@_output_type = px) and (length(@values) = 1) {
+  .topUnitReturn(extract(@values, 1));
+
+  @{name}: @top;
+}
+// Basic Mixins
+// =====
+.border (
+  @props;
+  @rest...
+){
+  .propCalc(border,)
+}
+// CSS3+ Mixins
+// =====
+
+// :Extend(able) mixins
+// =====
+
+// Clearfix
+.clearfix when (@_old_ie = false){
+  &:after { 
+    content: "";
+    display: table;
+    clear: both;
+  }
+}
+.clearfix when (@_old_ie = true) {
+  &:before, &:after { content: ""; display: table; }
+  &:after { clear: both; }
+  // For IE7
+  zoom: 1;
+}
+
+// For image replacement
+.ir { 
+  display: block; 
+  border: 0; 
+  text-indent: -999em; 
+  overflow: hidden; 
+  background-color: transparent; 
+  background-repeat: no-repeat; 
+  text-align: left; direction: ltr; 
+
+  & br {display: none;}
+}
+
+// Hide from both screenreaders and browsers: h5bp.com/u 
+.hidden { display: none !important; visibility: hidden; }
+
+// Hide only visually, but have it available for screenreaders: h5bp.com/v 
+.visuallyhidden { border: 0; clip: rect(0 0 0 0); height: 1px; margin: -1px; overflow: hidden; padding: 0; position: absolute; width: 1px; }
+
+// Extends the .visuallyhidden class to allow the element to be focusable when navigated to via the keyboard: h5bp.com/p 
+.visuallyhidden.focusable:active, .visuallyhidden.focusable:focus { clip: auto; height: auto; margin: 0; overflow: visible; position: static; width: auto; }
+
+// Hide visually and from screenreaders, but maintain layout
+.invisible { visibility: hidden; }

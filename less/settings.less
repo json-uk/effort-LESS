@@ -1,0 +1,42 @@
+// ====
+// Framework Settings
+// ================================================================================
+
+
+// Units and Rhythm 
+// =====
+
+// Base font-size calculation (DO NOT CHANGE)
+@base_px: 16;
+
+
+// ====
+// User Settings
+// ================================================================================
+
+// Support Legacy IE (< 9)
+// 
+// If `true` will output legacy css rules
+// === //
+@_old_ie: false;
+
+// Use Rem or Ems for mixin output
+// Values: em[,rem,px]
+@_output_type: em;
+// // Threshold at which relative units are no longer converted. null[,integer]
+@_do_not_convert_below_threshold: 3;
+
+// Used as the default font context of the framework
+@_base_font_px: 16;
+// Used on :root to set font size percentage (DO NOT CHANGE). 
+@root_font_size: unit(((@_base_font_px / @base_px) * 100),%);
+
+// ===
+//  Grid Settings
+// ================================================================================
+
+// Sets grid type: 
+//   If `true` grid columns will be 100% wide by default
+// === //
+@_mobile_first: true;
+

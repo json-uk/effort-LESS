@@ -1,0 +1,42 @@
+// ====
+// Effort-{LESS}
+// 
+// Author: Author Name 
+// Email: mail@example.com
+// ================================================================================
+
+/** 
+* Effort-{LESS}:
+* Simple LESS framework for building mobile-first responsive sites
+*/
+
+/** 
+ * External Dependencies:
+ * Effort-{LESS} prefers [normalize.css](https://github.com/jonathantneal/normalize.css). 
+ * We import this library first.
+ *
+ */
+@import (less) url(//cdnjs.cloudflare.com/ajax/libs/normalize/3.0.1/normalize.min.css);
+
+
+@import "settings";
+// Using (reference) so the :extend(able) utility rules are not output-
+// unless called.
+@import (reference) "mixins";
+
+/** 
+ * Component Name:
+ * Component Description - add `code`  like this
+ *
+ *   @example
+ *   div.foo
+ *     p.bar Lorem ipsum...
+ *        
+ */
+html {
+  font-size: @root_font_size;
+}
+body {
+  .propCalc(margin;2 15 0;@_base_font_px;3);
+
+}
